@@ -11,8 +11,8 @@ const app = createApp(App)
 app.component('Button',Button);
 app.use(
     createAuth0({
-        domain: "dev-fo5konvpkt4e4gxk.us.auth0.com",
-        clientId: "SPtsnzY8HRxTj7PvXyJpPJ6hyvQXsa5X",
+        domain: import.meta.env.VITE_AUTH0_DOMAIN,
+        clientId: import.meta.env.VITE_AUTH0_CLIENT_ID,
         authorizationParams: {
         redirect_uri: window.location.origin
         }
