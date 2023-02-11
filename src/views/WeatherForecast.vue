@@ -2,8 +2,10 @@
     <div class="container" v-show="this.user?.nickname">
         <p class="mb-5 text">{{ name }}</p>
         <a target="_blank" :href="githubLink" class="mb-5 text">{{ githubLink }}</a>
-        <input type="text" class="mb-5">
-        <Button type="default" class="mb-5 btn">Display Weather</Button>
+        <form @submit.prevent="submitForm" class="container">
+            <Input inputType="text" v-model="search" class="mb-5" icon="magnifying-glass" />
+            <Button buttonType="submit" type="default" class="mb-5 btn">Display Weather</Button>
+        </form>
     </div>
 </template>
 
@@ -13,6 +15,7 @@ export default {
     data(){
         return {
             user: null,
+            search: "",
         }
     },
 
@@ -25,9 +28,15 @@ export default {
         }
     },
 
+    methods:{
+        submitForm(){
+            alert(`searching for ${this.search}`);
+        }
+    },
+
     beforeMount(){
         this.user = this.$auth0.user;
-    }
+    },
 }
 </script>
 
