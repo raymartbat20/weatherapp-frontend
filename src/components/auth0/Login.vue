@@ -1,7 +1,13 @@
 <template>
   <div>
     <h2>{{ authenticatedUser }}</h2>
-    <button @click="login" v-if="!authenticatedUser">Log in</button>
+    <Button 
+      v-if="!authenticatedUser"
+      @click="login"
+      type="success"
+    >
+      Log in
+    </Button>
   </div>
 </template>
 <script>
