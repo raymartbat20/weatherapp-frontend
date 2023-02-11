@@ -10,7 +10,7 @@ import WeatherForecast from './views/WeatherForecast.vue'
     <Header :user="user" />
     <div class="container">
       <LandingPage v-if="!user" />
-      <WeatherForecast :user="user" />
+      <WeatherForecast v-else />
     </div>
   </div>
 
@@ -27,6 +27,10 @@ export default {
     return {
       user: this.$auth0.user
     }
+  },
+
+  mounted(){
+    this.user = this.$auth0.user;
   }
 }
 </script>

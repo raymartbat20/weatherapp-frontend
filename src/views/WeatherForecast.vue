@@ -1,7 +1,7 @@
 <template>
-    <div class="container">
-        <p class="mb-5 text">{{ username }}</p>
-        <a :href="githubLink" class="mb-5 text">{{ githubLink }}</a>
+    <div class="container" v-show="this.user?.nickname">
+        <p class="mb-5 text">{{ name }}</p>
+        <a target="_blank" :href="githubLink" class="mb-5 text">{{ githubLink }}</a>
         <input type="text" class="mb-5">
         <Button type="default" class="mb-5 btn">Display Weather</Button>
     </div>
@@ -9,23 +9,30 @@
 
 <script>
 export default {
+
     data(){
         return {
-            username: "JohnDoe",
+            user: null,
         }
     },
 
     computed: {
         githubLink(){
-            return `https://github.com/JohnDoe`
+            return `https://github.com/${this.user?.nickname}`
+        },
+        name(){
+            return this.user?.name
         }
+    },
+
+    beforeMount(){
+        this.user = this.$auth0.user;
     }
 }
 </script>
 
 <style scoped>
 .container{
-    /* text-align: center; */
     display: flex;
     flex-flow: column;
     align-items: center;
