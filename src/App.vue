@@ -2,13 +2,15 @@
 import { RouterLink, RouterView } from 'vue-router'
 import Header from './components/main/Header.vue'
 import LandingPage from './views/LandingPage.vue'
+import WeatherForecast from './views/WeatherForecast.vue'
 </script>
 
 <template>
   <div>
     <Header :user="user" />
     <div class="container">
-      <LandingPage />
+      <LandingPage v-if="!user" />
+      <WeatherForecast :user="user" />
     </div>
   </div>
 
@@ -18,6 +20,7 @@ import LandingPage from './views/LandingPage.vue'
 export default {
   components:{
     LandingPage,
+    WeatherForecast
   },
 
   data(){
@@ -30,8 +33,8 @@ export default {
 <style scoped>
 .container{
   width: 100%;
-  padding-right: 500px;
-  padding-left: 500px;
+  padding-right: 300px;
+  padding-left: 300px;
   margin-right: auto;
   margin-left: auto;
 }
