@@ -1,10 +1,12 @@
 import { createApp } from 'vue'
 import App from './App.vue'
+import router from './router/index'
 import { createAuth0 } from '@auth0/auth0-vue';
 import './assets/main.css'
 
 import Button from './components/general/Button.vue';
 import Input from './components/general/Input.vue';
+import Table from './components/general/Table.vue';
 
 /* import the fontawesome core */
 import { library } from '@fortawesome/fontawesome-svg-core'
@@ -17,17 +19,18 @@ import { fas } from '@fortawesome/free-solid-svg-icons'
 
 library.add(fas);
 const app = createApp(App)
-
-// app.use(router)
+app.use(router)
 app.component('Button',Button);
 app.component('Input',Input);
+app.component('Table',Table);
+
 app.component('FontAwesomeIcon', FontAwesomeIcon)
 app.use(
     createAuth0({
         domain: import.meta.env.VITE_AUTH0_DOMAIN,
         clientId: import.meta.env.VITE_AUTH0_CLIENT_ID,
         authorizationParams: {
-        redirect_uri: window.location.origin
+            redirect_uri: window.location.origin
         }
     })
 );

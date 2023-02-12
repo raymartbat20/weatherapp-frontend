@@ -11,7 +11,20 @@ import Auth0Login from '@/components/auth0/Login.vue';
 export default {
     components:{
         Auth0Login,
+    },
+
+    mounted(){
+    if(this.$auth0.user?.nickname){
+      window.localStorage.setItem('authUser',this.user);
     }
+
+    const authenticatedUser = window.localStorage.getItem('authUser');
+    if(authenticatedUser){
+      this.$router.push('/weather-forecast')
+
+      return;
+    }
+  }
 }
 </script>
 

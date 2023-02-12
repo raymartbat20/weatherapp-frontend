@@ -9,8 +9,7 @@ import WeatherForecast from './views/WeatherForecast.vue'
   <div>
     <Header :user="user" />
     <div class="container">
-      <LandingPage v-if="!user" />
-      <WeatherForecast v-else />
+      <RouterView />
     </div>
   </div>
 
@@ -29,16 +28,29 @@ export default {
     }
   },
 
-  mounted(){
+  beforeCreate(){
     this.user = this.$auth0.user;
+  },
+
+  mounted(){
+    if(this.$auth0.user?.nickname){
+      window.localStorage.setItem('authUser',this.user);
+    }
+
+    const authenticatedUser = window.localStorage.getItem('authUser');
+    // if(authenticatedUser){
+    //   this.$router.push('/weather-forecast')
+
+    //   return;
+    // }
   }
 }
 </script>
 <style scoped>
 .container{
   width: 100%;
-  padding-right: 300px;
-  padding-left: 300px;
+  padding-right: 700px;
+  padding-left: 700px;
   margin-right: auto;
   margin-left: auto;
 }

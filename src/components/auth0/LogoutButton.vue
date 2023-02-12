@@ -7,6 +7,7 @@
   export default {
     methods: {
       logout(){
+        window.localStorage.removeItem('authUser');
         this.$auth0.logout({ logoutParams: { returnTo: window.location.origin } });
       }
     }
