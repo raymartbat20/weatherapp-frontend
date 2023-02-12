@@ -49,6 +49,7 @@ export default {
     methods:{
         async submitForm(){
             this.hasError = false;
+            this.forecastData = null;
             this.fetching = true;
             let queryParams = this.setQueryParameter({search: this.search});
             const res = await WeatherForecastApi.getWeather(queryParams)
@@ -56,6 +57,9 @@ export default {
             if(res.status === 422 || res.data.forecast.status === "404"){
                 this.hasError = true;
                 this.errorMessage = res.status === 422 ? res.message : res.data.forecast.message
+                this.fetching = false;
+                
+                return;
             }
             const forecast = res.data.forecast
             this.keys = [
