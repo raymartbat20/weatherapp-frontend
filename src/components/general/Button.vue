@@ -1,5 +1,9 @@
 <template>
-    <button :class="['button',type]">
+    <button
+     :class="['button',type]"
+     :disabled="disabled"
+     :type="buttonType"
+    >
         <slot></slot>
     </button>
 </template>
@@ -10,6 +14,16 @@ export default {
         type: {
             type: String,
             default: 'default'
+        },
+
+        disabled: {
+            type: Boolean,
+            default: false
+        },
+
+        buttonType: {
+            type: String,
+            default: "button"
         }
     }
 }
@@ -30,7 +44,7 @@ export default {
     border-color: rgb(48, 127, 230);
 }
 
-.default:hover {
+.default:hover:enabled {
     background-color: rgb(38, 99, 179);
     border-color: rgb(37, 101, 184);
 }
@@ -40,7 +54,7 @@ export default {
     border-color: rgb(53, 207, 104);
 }
 
-.success:hover {
+.success:hover:enabled {
     background-color: rgb(28, 202, 86);
     border-color: rgb(28, 202, 86);
 }
@@ -50,9 +64,13 @@ export default {
     border-color: rgb(233, 55, 55);
 }
 
-.danger:hover {
+.danger:hover:enabled {
     background-color: rgb(206, 30, 30);
     border-color: rgb(206, 30, 30);
 }
 
+.button:disabled{
+    cursor: not-allowed;
+    opacity: 0.8;
+}
 </style>
