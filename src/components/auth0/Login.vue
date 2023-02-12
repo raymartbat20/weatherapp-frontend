@@ -1,6 +1,5 @@
 <template>
   <div>
-    <h2>{{ authenticatedUser }}</h2>
     <Button 
       v-if="!authenticatedUser"
       @click="login"
@@ -20,6 +19,7 @@ export default {
     },
     methods: {
       login() {
+        window.localStorage.setItem('authUser',this.$auth0.user);
         this.$auth0.loginWithRedirect();
       }
     }
